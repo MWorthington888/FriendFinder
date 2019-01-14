@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Reservation Page</title>
+
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+      <div class="row">
+      <div class="col-lg-12">
+       <div>
+          <h1>Survey Questions</h1>
+        </div>
+          <div class="card-body">
+            <form role="form">
+              <div class="form-group">
+                <label for="reserve-name">Name (Required)</label>
+                <input type="text" class="form-control" id="reserve-name">
+              </div>
+              <div class="form-group">
+                <label for="reserve-phone">Link to Photo Image of yourself (Required)</label>
+                <input type="text" class="form-control" id="image">
+              </div>
+              </form>
+          </div>
+      </div>
+    </div>
+
+
+
+              <label for="q1">'Mad Men' is a fantastic show!</label>
+              <div>
+              <select class="u-half-width" id="q1">
+                <option value="1">Strongly disagree</option>
+                <option value="2">Somewhat disagree</option>
+                <option value="3">No opinion</option>
+                <option value="4">Somewhat agree</option>
+                <option value="5">Strongly agree</option>
+              </select>
+            </div>
+
+            <label for="q2"> 'The Simpsons' was funny but has since jumped the shark!</label>
+              <div>
+              <select class="u-half-width" id="q2">
+                <option value="1">Strongly disagree</option>
+                <option value="2">Somewhat disagree</option>
+                <option value="3">No opinion</option>
+                <option value="4">Somewhat agree</option>
+                <option value="5">Strongly agree</option>
+              </select>
+            </div>
+
+            <label for="q3"> I know where the term 'Jumped the shark' originated. It comes from the TV show: </label>
+            <div>
+            <select class="u-half-width" id="q3">
+              <option value="0">Three's Company</option>
+              <option value="0">The Facts of Life</option>
+              <option value="0">M*A*S*H</option>
+              <option value="5">Happy Days</option>
+              <option value="0">Knight Rider</option>
+            </select>
+          </div>
+            
+
+
+
+
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+    <footer class="footer">
+        <div class="container">
+          <p><a href="/api/tables">API Friends List</a> | <a href="/api/waitlist">GitHub Repo</a>
+        </div>
+      </footer>
+
+  </div>
+
+</body>
+
+</html>
+
+<!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS SENT TO OUR SERVER -->
+<script type="text/javascript">
+  // In this code below we create the Front-end JavaScript which "POSTS" our form data to our express server.
+  // In essence, when the user hits submit, jQuery grabs all of the fields then sends a post request to our api
+  // Our api recognizes the route (/api/tables)... and then runs the associated code (found in api-routes.js).
+  // In this case the associated code "saves" the data to the table-data.js file or waitinglist-data.js file
+
+  $(".submit").on("click", function(event) {
+    event.preventDefault();
+
+    // Here we grab the form elements
+    var newReservation = {
+      customerName: $("#reserve-name").val().trim(),
+      phoneNumber: $("#reserve-phone").val().trim(),
+      customerEmail: $("#reserve-email").val().trim(),
+      customerID: $("#reserve-unique-id").val().trim()
+    };
+
+    console.log(newReservation);
+
+    // This line is the magic. It"s very similar to the standard ajax function we used.
+    // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
+    // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
+    // depending on if a tables is available or not.
+
+    $.post("/api/tables", newReservation,
+      function(data) {
+
+        // If a table is available... tell user they are booked.
+        if (data) {
+          alert("Yay! You are officially booked!");
+        }
+
+        // If a table is available... tell user they on the waiting list.
+        else {
+          alert("Sorry you are on the wait list");
+        }
+
+        // Clear the form when submitting
+        $("#reserve-name").val("");
+        $("#reserve-phone").val("");
+        $("#reserve-email").val("");
+        $("#reserve-unique-id").val("");
+
+      });
+
+  });
+
+</script>
