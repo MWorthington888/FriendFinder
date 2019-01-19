@@ -1,3 +1,5 @@
+// This friends data array is used to match up potential friends for the users -----------------------------------
+
 module.exports = [
     {
         name: "Terry Jones",

@@ -16,6 +16,8 @@ And a screen shot of the 'Match!' pop-up window:
 https://drive.google.com/open?id=17WFrc2BPLTrkGv0CwnVWyR_pXsp4H5Yy
 
 
+
+Developers notes:
 App functionality concerning routes via AJAX were imported from StarWarsApp activity from Week 13.
 
 StarWarsApp and HotRestaurant activities from Week 13 were also used as templates for Express middleware.
