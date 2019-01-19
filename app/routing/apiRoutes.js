@@ -1,19 +1,21 @@
-module.exports = function(app, data){
-    
-    app.get("/api/friends", function(req, res){
+//Routes
+module.exports = function (app, data) {
+
+    // API GET Requests
+    app.get("/api/friends", function (req, res) {
         return res.json(data);
     });
-  
-    app.post("/api/friends", function(req, res){
-        const newFriend = req.body;
-        
-        for(const i = 0; i<newFriend.scores.length; i++){
-            const string = newFriend.scores[i];
-            const int = parseInt(string);
-            newFriend.scores.splice(i,1,int);
+
+    // API POST Requests
+    app.post("/api/friends", function (req, res) {
+        var newFriend = req.body;
+        for (var i = 0; i < newFriend.scores.length; i++) {
+            var string = newFriend.scores[i];
+            var int = parseInt(string);
+            newFriend.scores.splice(i, 1, int);
         }
-        
+
         data.push(newFriend);
         res.json(newFriend);
     });
-  }
+}

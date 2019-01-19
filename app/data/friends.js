@@ -1,24 +1,23 @@
 module.exports = [
     {
-        name: "John Cleese",
-        scores: [1,1,1,1,1,1,1,1,1,1],
-        image: "https://c8.alamy.com/comp/AG4MK4/terry-jones-british-author-comedian-and-former-monty-python-frontman-AG4MK4.jpg"
+        name: "Terry Jones",
+        scores: [3, 4, 2, 1, 4, 5, 3, 4, 5, 2],
+        image: "https://pbs.twimg.com/profile_images/1410775609/terry-jones.jpg"
+        
     },
     {
         name: "Eric Idle",
-        scores: [3,3,3,3,3,3,3,3,3,3],
-        image: "http://ramsis.co.ke/wp-content/uploads/2016/06/person.png"
+        scores: [5, 2, 3, 3, 5, 2, 1, 4, 5, 2],
+        image: "https://www.thefamouspeople.com/profiles/images/eric-idle-2.jpg"
     },
     {
-        name: "Terry Gilliam",
-        scores: [1,2,1,1,3,1,1,5,1,5],
-        image: "http://www.relevantconnections.net/wp-content/uploads/2018/03/businessman.png"
+        name: "John Cleese",
+        scores: [2, 4, 5, 2, 3, 4, 5, 3, 2, 5],
+        image: "https://www.biography.com/.image/t_share/MTE5NDg0MDU0OTI2OTUxOTUx/john-cleese-9250570-1-402.jpg"
     },
     {
-        name: "Terry Jones",
-        scores: [5,5,5,5,5,5,5,5,5,5],
-        image: "https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/256x256/businesswoman2.png"
-        
+        name: "Michael Palin",
+        scores: [4, 3, 4, 1, 4, 5, 2, 1, 2, 3],
+        image: "https://images.randomhouse.com/author/23099"
     }
   ]
-  

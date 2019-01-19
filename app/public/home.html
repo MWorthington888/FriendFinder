@@ -1,38 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Tables Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <style>
+            body {
+                  background-color: rgb(219, 182, 236);
+                }
+                </style>
 </head>
 <body>
 
-  <div class="container">
-
-    <div class="jumbotron">
-      <h1 class="text-center"><span class="fas fa-user-friends"></span> Friend Finder <span class="fab fa-accessible-icon"></span> </h1>
-      <hr>
-      <h2 class="text-center">With just a few questions, we can find the right match for you!</h2>
-      <br>
-
-      <div class="text-center">
-        <a href="/tables"><button class="btn btn-lg btn-primary"><span class="fa fa-list-alt"></span> Start Survey!</button></a>
-      </div>
-
+       
+               
+        <div class="container">
+        <div class="jumbotron bg-primary text-white text-center">
+            <h1 class="display-4"> <i class="fas fa-user-alt"></i>  Welcome to FriendFinder!  <i class="fab fa-accessible-icon"></i></h1>
+            <hr>
+            <p class="h5">With just a few answers, we can find your perfect match!</p>
+        </div>
+        <br>
+        <a href="/survey" id="surveyButton" class="btn-lg btn-block btn-secondary text-black text-center">Click here to take the survey!</a>
+        <br>
+        <p><a href="/api/friends" target="_blank">API Friends List</a> | <a href="https://github.com/MWorthington888/FriendFinder.git" target="_blank">GitHub Repo</a></p>
+        <br>
     </div>
-
-    <footer class="footer">
-      <div class="container">
-        <p><a href="/api/tables">API Friends List</a> | <a href="/api/waitlist">GitHub Repo</a>
-      </div>
-    </footer>
-
-  </div>
-
-
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>
