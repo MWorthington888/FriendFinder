@@ -23,4 +23,7 @@ StarWarsApp and HotRestaurant activities from Week 13 were also used as template
 Several open-sourced icons from Font Awesome (v5.6.3) were used.
 
 This app is deployed remotely to Heroku.
+<<<<<<< HEAD
 
+=======
+>>>>>>> 49708960bbcdcb0dde304972ca8b26fd542130ba
