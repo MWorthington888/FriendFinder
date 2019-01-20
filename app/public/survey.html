@@ -38,7 +38,7 @@
                 <input type="text" class="form-control" id="userimage">
             </div>
 
-            <!-- Survey Questions start here ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+            <!-- Survey Questions start here. Taken from Bootstrap Custom form-groups +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
             <div class="form-group">
                 <h4>
                     <div class="text-center">Don't be shy! Tell us how you really feel!</div>
@@ -159,12 +159,12 @@
         <a id="submitButtonId" class="btn-lg btn-block btn-primary text-white text-center">Submit</a>
 
         <br><br>
-        <!-- Modal starts here ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-        <div class="modal" id="myModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
+        <!-- Modal starts here. This code taken from Bootstrap Modals +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+        <div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Your Match Has Been Found!</h5>
+                        <h5 class="modal-title">We found your friend!</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -172,7 +172,7 @@
                     <div class="modal-body">
                         <p id="modalTxt"></p>
                         <div>
-                            <img id="imageId" style="width: 140px; height: 140px;">
+                            <img id="imageId" style="width: 420px; height: 350px;">
                         </div>
                     </div>
                 </div>
@@ -185,44 +185,53 @@
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
     <script>
+        // This pushes the value of each answer into an array -----------------------------------
         $("#submitButtonId").click(function () {
             event.preventDefault();
-            var scoresArr = [];
+            const answerValues = [];
             for (var i = 1; i < 11; i++) {
-                scoresArr.push(parseInt($("#Q" + i).val().trim()));
+                answerValues .push(parseInt($("#Q" + i).val().trim()));
             }
-            var newSubmission = {
+            // This section takes user's name, picture link and array of answer values and places this data into a variable ----
+            const newUserProfile = {
                 name: $("#username").val().trim(),
-                scores: scoresArr,
+                scores: answerValues,
                 image: $("#userimage").val().trim()
             }
-            var currFriendsScores = [];
-            var currFriendsNames = [];
-            var currFriendsImages = [];
+            // This section creates three arrays where we will push values, names and images from api/friends JSON data -------
+            const apiFriendsScores = [];
+            const apiFriendsNames = [];
+            const apiFriendsImages = [];
             $.get("/api/friends", function (data) {
                 for (var i = 0; i < data.length; i++) {
-                    currFriendsScores.push(data[i].scores);
-                    currFriendsNames.push(data[i].name);
-                    currFriendsImages.push(data[i].image);
+                    apiFriendsScores.push(data[i].scores);
+                    apiFriendsNames.push(data[i].name);
+                    apiFriendsImages.push(data[i].image);
                 }
             })
-            $.post("/api/friends", newSubmission, function (data) {
-                var diffArray = [];
-                for (var i = 0; i < currFriendsScores.length; i++) {
+            // Here we calculate the total value differences between the user and friends located in our API ------------------
+            // Resourced from MDN Web Docs from Mozilla
+            $.post("/api/friends", newUserProfile, function (data) {
+                const differenceArray = [];
+                for (var i = 0; i < apiFriendsScores.length; i++) {
                     var diff = 0;
-                    for (var k = 0; k < currFriendsScores[i].length; k++) {
-                        diff += Math.abs(currFriendsScores[i][k] - data.scores[k]);
+                    for (var k = 0; k < apiFriendsScores[i].length; k++) {
+                        diff += Math.abs(apiFriendsScores[i][k] - data.scores[k]);
                     }
-                    diffArray.push(diff);
+                    differenceArray.push(diff);
                 }
-                var smallestDifferenceIn = diffArray.indexOf(Math.min(...diffArray));
-                var match = currFriendsNames[smallestDifferenceIn];
-                var image = currFriendsImages[smallestDifferenceIn];
+                // (Math.min ...array) returns our lowest value. This lowest value represents our closest friend match to the user. ------
+                // Resourced from MDN Web Docs from Mozilla
+                const smallestDifferenceIn = differenceArray.indexOf(Math.min(...differenceArray));
+                const match = apiFriendsNames[smallestDifferenceIn];
+                const image = apiFriendsImages[smallestDifferenceIn];
                 $("#myModal").modal("toggle");
-                $("#modalTxt").text("Your Match is: " + match);
+                $("#modalTxt").text("You're most compatible with " + match + "!");
                 $("#imageId").attr("src", image);
             });
+            // This blows of the survey data ----------------------------------------------------------
             $("#username").val("");
             for (var i = 1; i < 11; i++) {
                 $("#Q" + i).val("");
